@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="BatteryReporter_UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BatteryReporter_UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <local:Main />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <local:InverseBoolConverter
+            x:Key="InverseBoolConverter" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView
+            Grid.Row="0"
+            SelectionMode="None"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            ItemsSource="{Binding Controllers}">
+            <ListView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="local:ObservableController">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="3*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="{Binding Name}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{Binding Battery}"
+                            TextAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="{Binding Latency}"
+                            TextAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style
+                    TargetType="ListViewItem">
+                    <Setter
+                        Property="HorizontalContentAlignment"
+                        Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+</Page>
